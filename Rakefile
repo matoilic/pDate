@@ -40,7 +40,7 @@ module PDate
   end
   
   def self.build_doc
-    recreate_dirs(DOC_DIR)
+    recreate_dirs(DOC_DIR, DIST_DIR)
     
     sprocketize('pdate.js', false)
     PDoc::Runner.new(DIST_FILE, {
