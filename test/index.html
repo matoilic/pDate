@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>pDate</title>
+	<link rel="stylesheet" href="testlog.css" type="text/css" media="screen" charset="utf-8" />
+</head>
+
+<body>
+	<!-- Log output -->
+	<div id="testlog"> </div>
+
+	<script src="../vendor/prototype/dist/prototype.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../vendor/scriptaculous/src/unittest.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../dist/pdate.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		new Test.Unit.Runner({
+			testClone: function() {
+				var date1 = new Date(2009, 4, 5, 21, 22, 33);
+				var date2 = date1.clone();
+				this.assertEqual(date1.valueOf(), date2.valueOf());
+			},
+			
+			testEqualsTo: function() {
+				var date1 = new Date(2009, 4, 5, 21, 22, 33);
+				var date2 = new Date(2009, 4, 5, 21, 22, 34);
+				this.assertEqual(true, date1.equalsTo(date2));
+				
+				date2 = new Date(2009, 4, 5, 21, 21, 34);
+				this.assertEqual(false, date1.equalsTo(date2));
+			},
+			
+			testEqualsTo1: function() {
+				var date1 = new Date(2009, 5, 6, 22, 23, 34);
+				var date2 = new Date(2009, 4, 5, 21, 22, 33);
+				this.assertEqual(true, date1.equalsTo(date2, 1));
+				
+				date2 = new Date(2010, 4, 5, 21, 22, 33);
+				this.assertEqual(false, date1.equalsTo(date2, 1));
+			},
+			
+			testEqualsTo2: function() {
+				var date1 = new Date(2009, 4, 6, 21, 22, 33);
+				var date2 = new Date(2009, 4, 5, 21, 22, 33);
+				this.assertEqual(true, date1.equalsTo(date2, 2));
+				
+				date2 = new Date(2009, 5, 5, 21, 22, 33);
+				this.assertEqual(false, date1.equalsTo(date2, 2));
+			},
+			
+			testEqualsTo3: function() {
+				var date1 = new Date(2009, 4, 5, 21, 22, 33);
+				var date2 = new Date(2009, 4, 5, 22, 22, 33);
+				this.assertEqual(true, date1.equalsTo(date2, 3));
+				
+				date2 = new Date(2009, 4, 6, 22, 22, 33);
+				this.assertEqual(false, date1.equalsTo(date2, 3));
+			},
+			
+			testEqualsTo4: function() {
+				var date1 = new Date(2009, 4, 5, 21, 22, 33);
+				var date2 = new Date(2009, 4, 5, 21, 23, 33);
+				this.assertEqual(true, date1.equalsTo(date2, 4));
+				
+				date2 = new Date(2009, 4, 5, 22, 23, 33);
+				this.assertEqual(false, date1.equalsTo(date2, 4));
+			},
+			
+			testEqualsTo5: function() {
+				var date1 = new Date(2009, 4, 5, 21, 22, 33);
+				var date2 = new Date(2009, 4, 5, 21, 22, 34);
+				this.assertEqual(true, date1.equalsTo(date2, 5));
+				
+				date2 = new Date(2009, 4, 5, 21, 23, 34);
+				this.assertEqual(false, date1.equalsTo(date2, 5));
+			},
+			
+			testEqualsTo6: function() {
+				var date1 = new Date(2009, 4, 5, 21, 22, 33);
+				var date2 = new Date(2009, 4, 5, 21, 22, 33);
+				this.assertEqual(true, date1.equalsTo(date2, 6));
+				
+				date2 = new Date(2009, 4, 5, 21, 22, 34);
+				this.assertEqual(false, date1.equalsTo(date2, 6));
+			},
+			
+			testEqualsTo7: function() {
+				var date1 = new Date(2009, 4, 5, 21, 22, 33);
+				var date2 = new Date(2009, 4, 5, 21, 22, 33);
+				this.assertEqual(true, date1.equalsTo(date2, 7));
+				
+				date2 = new Date(2009, 4, 5, 21, 22, 34);
+				this.assertEqual(false, date1.equalsTo(date2, 7));
+			},
+			
+			testGetDayOfYear: function() {
+				var date = new Date(2009, 11, 30);
+				this.assertEqual(364, date.getDayOfYear());
+			},
+			
+			testGetDaysInMonth1: function() {
+				this.assertEqual(31, new Date(2009, 0, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth2: function() {
+				this.assertEqual(28, new Date(2009, 1, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth3: function() {
+				this.assertEqual(31, new Date(2009, 2, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth4: function() {
+				this.assertEqual(30, new Date(2009, 3, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth5: function() {
+				this.assertEqual(31, new Date(2009, 4, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth6: function() {
+				this.assertEqual(30, new Date(2009, 5, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth7: function() {
+				this.assertEqual(31, new Date(2009, 6, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth8: function() {
+				this.assertEqual(31, new Date(2009, 7, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth9: function() {
+				this.assertEqual(30, new Date(2009, 8, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth10: function() {
+				this.assertEqual(31, new Date(2009, 9, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth11: function() {
+				this.assertEqual(30, new Date(2009, 10, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonth12: function() {
+				this.assertEqual(31, new Date(2009, 11, 1).getDaysInMonth());
+			},
+			
+			testGetDaysInMonthInLeapYear: function() {
+				this.assertEqual(29, new Date(2008, 1, 1).getDaysInMonth());
+			},
+			
+			testGetweekOfYear1: function() {
+				//when first day of year is in first week
+				this.assertEqual(1, new Date(2009, 0, 1).getWeekOfYear());
+				this.assertEqual(19, new Date(2009, 4, 5).getWeekOfYear());
+			},
+			
+			testGetweekOfYear2: function() {
+				//when first day of year is not in first week
+				this.assertEqual(52, new Date(2006, 0, 1).getWeekOfYear());
+				this.assertEqual(18, new Date(2006, 4, 5).getWeekOfYear());
+			},
+			
+			testIsLeapYear1: function() {
+				var date = new Date(2008, 0, 1);
+				this.assertEqual(true, date.isLeapYear());
+			},
+			
+			testIsLeapYear2: function() {
+				var date = new Date(2000, 0, 1);
+				this.assertEqual(true, date.isLeapYear());
+			},
+			
+			testIsLeapYear3: function() {
+				var date = new Date(1900, 0, 1);
+				this.assertEqual(false, date.isLeapYear());
+			},
+			
+			testStrftime1: function() {
+				var date = new Date(2009, 4, 5, 9, 25, 22);
+				this.assertEqual('05.05.2009 09:25:22', date.strftime('%d.%m.%Y %H:%i:%s'));
+			},
+			
+			testStrftime2: function() {
+				var date = new Date(2009, 5, 5, 9, 25, 22);
+				this.assertEqual('Fri Jun 5 09 9:25 AM', date.strftime('%D %M %j %y %g:%i %A'));
+			},
+			
+			testStrftime3: function() {
+				var date = new Date(2009, 5, 5, 13, 25, 22);
+				this.assertEqual('Fri Jun 5 1:25 PM', date.strftime('%D %M %j %g:%i %A'));
+			},
+			
+			testStrftime4: function() {
+				var date = new Date(2009, 5, 5, 9, 25, 22);
+				this.assertEqual('Friday June 5th 09:25 am', date.strftime('%l %F %j%S %h:%i %a'));
+			},
+			
+			testStrftime5: function() {
+				var date = new Date(2009, 5, 5, 13, 25, 22);
+				this.assertEqual('Friday June 5 01:25 pm', date.strftime('%l %F %j %h:%i %a'));
+			},
+			
+			testStrftime6: function() {
+				var date = new Date(2009, 5, 5, 1, 25, 22);
+				this.assertEqual('1:25', date.strftime('%G:%i'));
+			},
+			
+			testStrftime7: function() {
+				var date = new Date(2009, 5, 7);
+				this.assertEqual('7', date.strftime('%N'));
+			},
+			
+			testStrftime8: function() {
+				var date = new Date(2009, 5, 7);
+				this.assertEqual('0', date.strftime('%w'));
+			},
+			
+			testStrftime9: function() {
+				var date = new Date(2008, 11, 31);
+				this.assertEqual('366', date.strftime('%z'));
+			},
+			
+			testStrftime10: function() {
+				var date = new Date(2008, 0, 1);
+				this.assertEqual('1', date.strftime('%n'));
+			},
+			
+			testStrftime11: function() {
+				var date = new Date(2008, 1, 1);
+				this.assertEqual('29', date.strftime('%t'));
+			},
+			
+			testStrftime12: function() {
+				var date = new Date(2008, 1, 1);
+				this.assertEqual('1', date.strftime('%L'));
+			},
+			
+			testStrftime13: function() {
+				var date = new Date(2008, 1, 1);
+				var time = Math.ceil(date.valueOf() / 1e3);
+				this.assertEqual(time.toString(), date.strftime('%U'));
+			},
+			
+			testStrftime14: function() {
+				var date = new Date(2008, 1, 1);
+				this.assertEqual('st', date.strftime('%S'));
+				
+				date.setDate(2);
+				this.assertEqual('nd', date.strftime('%S'));
+				
+				date.setDate(3);
+				this.assertEqual('rd', date.strftime('%S'));
+				
+				date.setDate(4);
+				this.assertEqual('th', date.strftime('%S'));
+			},
+			
+			testStrptime1: function() {
+				var date1 = new Date(2009, 4, 10, 11, 35, 21);				
+				var date2 = Date.strptime('10.05.2009 11:35:21', '%d.%m.%Y %H:%i:%s');
+				this.assertEqual(true, date2.equalsTo(date1, 6));
+			},
+			
+			testStrptime2: function() {
+				var date1 = new Date(2009, 4, 2);
+				var date2 = Date.strptime('2.5.2009', '%j.%n.%Y');
+				this.assertEqual(true, date2.equalsTo(date1, 3));
+			},
+			
+			testStrptime3: function() {
+				var date1 = new Date(2009, 4, 2, 23, 21);
+				var date2 = Date.strptime('May 2, 2009 11:21 PM', '%F %j, %Y %h:%i %A');
+				this.assertEqual(true, date2.equalsTo(date1, 5));
+			},
+			
+			testStrptime4: function() {
+				var date1 = new Date(2009, 2, 21, 0, 21);
+				var date2 = Date.strptime('Mar 21, 2009 12:21 am', '%M %d, %Y %h:%i %a');
+				this.assertEqual(true, date2.equalsTo(date1, 5));
+			},
+			
+			testStrptime5: function() {
+				var date1 = new Date(2009, 2, 21, 13, 21);
+				var date2 = Date.strptime('Mar 21, 2009 1:21 pm', '%M %d, %Y %g:%i %a');
+				this.assertEqual(true, date2.equalsTo(date1, 5));
+			},
+			
+			testStrptime6: function() {
+				var date1 = new Date(2009, 2, 21, 1, 21);
+				var date2 = Date.strptime('Mar 21, 2009 1:21', '%M %d, %Y %G:%i');
+				this.assertEqual(true, date2.equalsTo(date1, 5));
+			}
+		});
+	</script>
+</body>
+</html>
