@@ -293,6 +293,18 @@
 				var date1 = new Date(2009, 2, 21, 1, 21);
 				var date2 = Date.strptime('Mar 21, 2009 1:21', '%M %d, %Y %G:%i');
 				this.assertEqual(true, date2.equalsTo(date1, 5));
+			},
+			
+			testStrptime7: function() {
+				var date1 = new Date(2010, 2, 31, 8, 0, 3);
+				var date2 = Date.strptime('31.03.2010 08:00:03', '%d.%m.%Y %H:%i:%s');
+				this.assertEqual(true, date2.equalsTo(date1, 6));
+			},
+			
+			testStrptime8: function() {
+				var date1 = new Date(10, 2, 31, 8, 0, 3);
+				var date2 = Date.strptime('31.03.0010 08:00:03', '%d.%m.%Y %H:%i:%s');
+				this.assertEqual(true, date2.equalsTo(date1, 6));
 			}
 		});
 	</script>

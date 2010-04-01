@@ -140,6 +140,11 @@ Date.Factory = Class.create({
  *      var date = Date.strptime('05 / 05 / 2009', '%m / %d / %Y');
 **/
 Date.strptime = function(string, format) {
+    function toInt(value) {
+        value = (value.length > 0) ? value.replace(/^([0]+)/, '') : value;
+        return parseInt(value);
+    }
+    
     var factory = new Date.Factory(), regExp, result;
     
     format.scan(/(%([djFmMnYaAgGhHis]{1}))/, function(match) {
@@ -150,7 +155,7 @@ Date.strptime = function(string, format) {
                 regExp = /(0[1-9]|[1-2][0-9]|3[0-1]|[1-9])/
                 if(regExp.test(string)) {
                     result = regExp.exec(string)[1];
-                    factory.setParam('day', parseInt(result));
+                    factory.setParam('day', toInt(result));
                     string = string.replace(new RegExp(result), '');
                 }
                 return;
@@ -171,7 +176,7 @@ Date.strptime = function(string, format) {
                 regExp = /(0[1-9]|1[1-2]|[1-9])/
                 if(regExp.test(string)) {
                     result = regExp.exec(string)[1];
-                    factory.setParam('month', parseInt(result)-1); 
+                    factory.setParam('month', toInt(result)-1); 
                     string = string.replace(new RegExp(result), '');
                 }
                 return;
@@ -191,7 +196,7 @@ Date.strptime = function(string, format) {
                 regExp = /([0-9]{4})/
                 if(regExp.test(string)) {
                     result = regExp.exec(string)[1];
-                    factory.setParam('year', parseInt(result)); 
+                    factory.setParam('year', toInt(result)); 
                     string = string.replace(new RegExp(result), '');
                 }
                 return;
@@ -214,7 +219,7 @@ Date.strptime = function(string, format) {
                 regExp = /(2[0-4]|[0-1][0-9]|[1-9])/
                 if(regExp.test(string)) {
                     result = regExp.exec(string)[1];
-                    factory.setParam('hours', parseInt(result)); 
+                    factory.setParam('hours', toInt(result)); 
                     string = string.replace(new RegExp(result), '');
                 }
                 return;
@@ -223,7 +228,7 @@ Date.strptime = function(string, format) {
                 regExp = /([0-5][0-9])/
                 if(regExp.test(string)) {
                     result = regExp.exec(string)[1];
-                    factory.setParam('minutes', parseInt(result)); 
+                    factory.setParam('minutes', toInt(result)); 
                     string = string.replace(new RegExp(result), '');
                 }
                 return;
@@ -232,7 +237,7 @@ Date.strptime = function(string, format) {
                 regExp = /([0-5][0-9])/
                 if(regExp.test(string)) {
                     result = regExp.exec(string)[1];
-                    factory.setParam('seconds', parseInt(result)); 
+                    factory.setParam('seconds', toInt(result)); 
                     string = string.replace(new RegExp(result), '');
                 }
                 return;
